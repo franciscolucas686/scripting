@@ -26,8 +26,12 @@ if 'hora' not in df.columns or 'taxa' not in df.columns:
 # Criando o gráfico
 plt.figure(figsize=(10, 5))
 grafico = sns.lineplot(x=df['hora'], y=df['taxa'])
-grafico.set_xticks(grafico.get_xticks())  # Garante que os rótulos estejam corretos
-grafico.set_xticklabels(df['hora'], rotation=90)  # Rotaciona os rótulos do eixo X
+
+# Garantindo que os ticks correspondam ao número correto de labels
+ticks = range(len(df['hora']))
+grafico.set_xticks(ticks)
+grafico.set_xticklabels(df['hora'][:len(ticks)], rotation=90)
+
 plt.xlabel("Hora")
 plt.ylabel("Taxa CDI")
 plt.title("Variação da Taxa CDI ao Longo do Tempo")
